@@ -16,7 +16,7 @@
 #' @param top,bottom,left,right see function \link[gridExtra]{arrangeGrob}
 #' 
 #' @details
-#' Function [consort_plot_rx()]
+#' Function [consort_rx()]
 #' \itemize{
 #' \item{finds the argument `side_box` of function \link[consort]{consort_plot}, from the argument of `orders`.}
 #' \item{adds top, bottom, left and/or right labels, via function \link[gridExtra]{arrangeGrob}.}
@@ -24,13 +24,13 @@
 #' }
 #' 
 #' @returns
-#' Function [consort_plot_rx()] returns a 
+#' Function [consort_rx()] returns a 
 #' \link[grid]{grob} object.
 #' 
 #' @importFrom consort consort_plot build_grid
 #' @importFrom gridExtra grid.arrange
 #' @export
-consort_plot_rx <- function(
+consort_rx <- function(
     data, 
     orders, 
     sidebox_pattern = '^sidebox_', 
@@ -42,15 +42,18 @@ consort_plot_rx <- function(
   nm <- names(orders)
   if (!length(nm) || anyNA(nm) || !all(nzchar(nm))) stop('illegal `orders` names')
   
-  consort_plot(
+  ret <- consort_plot(
     data = data, orders = orders, 
     side_box = grep(pattern = sidebox_pattern, x = nm, value = TRUE),
     ...
   ) |>
     build_grid() |>
     grid.arrange(top = top, bottom = bottom, left = left, right = right)
-  # gridExtra::grid.arrange friendlier than gridExtra::arrangeGrob
+  # gridExtra::grid.arrange is more friendly than gridExtra::arrangeGrob
   
+  attr(ret, which = 'text') <- 'Consort diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.'
+  
+  return(ret)
   # returned object class c('gtable', 'gTree', 'grob', 'gDesc')
   
 }

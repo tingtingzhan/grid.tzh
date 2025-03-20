@@ -18,5 +18,6 @@ Function \code{\link[=plot.gList]{plot.gList()}} does not have a returned value.
 Plot \link[grid]{gList} Object
 }
 \note{
-We don't have \code{grid:::plot.gList}, as of R version 4.4.3.
+We don't have similar function in package \pkg{grid} as of R version 4.4.3,
+nor in package \CRANpkg{gridExtra} as of 2017-09-08.
 }
