@@ -12,13 +12,13 @@ paste_nna_(..., sep = "; ")
 \item{sep}{\link[base]{character} scalar}
 }
 \value{
-Function \link{paste_nna_} returns a \link[base]{character} \link[base]{vector}.
+Function \code{\link[=paste_nna_]{paste_nna_()}} returns a \link[base]{character} \link[base]{vector}.
 }
 \description{
 Element-wise concatenation of non-\link[base]{missing} entries.
 }
 \details{
-Function \link{paste_nna_} can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
+Function \code{\link[=paste_nna_]{paste_nna_()}} can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
 }
 \examples{
 x = c(NA_character_, 'x1', 'x2')

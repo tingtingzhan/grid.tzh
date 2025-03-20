@@ -1,10 +1,13 @@
 
 
-#' @title Find \link[consort]{consort_plot} Side Box from `orders` Argument
+#' @title Finetune Function \link[consort]{consort_plot}
 #' 
-#' @param data \link[base]{data.frame}
+#' @description
+#' Some minor touch-ups of function \link[consort]{consort_plot}.
 #' 
-#' @param orders \link[base]{character} \link[base]{vector}
+#' @param data \link[base]{data.frame}, see function \link[consort]{consort_plot}
+#' 
+#' @param orders \link[base]{character} \link[base]{vector}, see function \link[consort]{consort_plot}
 #' 
 #' @param sidebox_pattern \link[base]{regex}
 #' 
@@ -13,8 +16,12 @@
 #' @param top,bottom,left,right see function \link[gridExtra]{arrangeGrob}
 #' 
 #' @details
-#' Function [consort_plot_rx()] finds the argument `side_box` of 
-#' function \link[consort]{consort_plot}, from the argument of `orders`.
+#' Function [consort_plot_rx()]
+#' \itemize{
+#' \item{finds the argument `side_box` of function \link[consort]{consort_plot}, from the argument of `orders`.}
+#' \item{adds top, bottom, left and/or right labels, via function \link[gridExtra]{arrangeGrob}.}
+#' \item{returns a \link[grid]{grob} object.}
+#' }
 #' 
 #' @returns
 #' Function [consort_plot_rx()] returns a 
@@ -96,10 +103,10 @@ sidebox <- function(pattern = '^sidebox_', data, ...) {
 #' @param sep \link[base]{character} scalar
 #' 
 #' @returns
-#' Function [paste_nna_] returns a \link[base]{character} \link[base]{vector}.
+#' Function [paste_nna_()] returns a \link[base]{character} \link[base]{vector}.
 #' 
 #' @details
-#' Function [paste_nna_] can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
+#' Function [paste_nna_()] can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
 #' 
 #' @examples
 #' x = c(NA_character_, 'x1', 'x2')

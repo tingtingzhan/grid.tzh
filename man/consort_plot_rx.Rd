@@ -2,7 +2,7 @@
 % Please edit documentation in R/consort.R
 \name{consort_plot_rx}
 \alias{consort_plot_rx}
-\title{Find \link[consort]{consort_plot} Side Box from \code{orders} Argument}
+\title{Finetune Function \link[consort]{consort_plot}}
 \usage{
 consort_plot_rx(
   data,
@@ -16,9 +16,9 @@ consort_plot_rx(
 )
 }
 \arguments{
-\item{data}{\link[base]{data.frame}}
+\item{data}{\link[base]{data.frame}, see function \link[consort]{consort_plot}}
 
-\item{orders}{\link[base]{character} \link[base]{vector}}
+\item{orders}{\link[base]{character} \link[base]{vector}, see function \link[consort]{consort_plot}}
 
 \item{sidebox_pattern}{\link[base]{regex}}
 
@@ -31,9 +31,13 @@ Function \code{\link[=consort_plot_rx]{consort_plot_rx()}} returns a
 \link[grid]{grob} object.
 }
 \description{
-Find \link[consort]{consort_plot} Side Box from \code{orders} Argument
+Some minor touch-ups of function \link[consort]{consort_plot}.
 }
 \details{
-Function \code{\link[=consort_plot_rx]{consort_plot_rx()}} finds the argument \code{side_box} of
-function \link[consort]{consort_plot}, from the argument of \code{orders}.
+Function \code{\link[=consort_plot_rx]{consort_plot_rx()}}
+\itemize{
+\item{finds the argument \code{side_box} of function \link[consort]{consort_plot}, from the argument of \code{orders}.}
+\item{adds top, bottom, left and/or right labels, via function \link[gridExtra]{arrangeGrob}.}
+\item{returns a \link[grid]{grob} object.}
+}
 }
