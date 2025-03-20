@@ -60,7 +60,7 @@ x = list(
   C = state.name[3:22],
   D = state.name[4:23])
 x |> venn() |> plot()
-x |> venn(palette = 'rainbow') |> plot()
+x |> venn(top = 'A Sample Venn Diagram', palette = 'rainbow') |> plot()
 }
 \seealso{
 Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, but not as elegantly as

@@ -38,7 +38,7 @@
 #'   C = state.name[3:22],
 #'   D = state.name[4:23])
 #' x |> venn() |> plot()
-#' x |> venn(palette = 'rainbow') |> plot()
+#' x |> venn(top = 'A Sample Venn Diagram', palette = 'rainbow') |> plot()
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
 #' @name venn
@@ -80,12 +80,14 @@ venn.data.frame <- function(object, ...) {
 
 #' @rdname venn
 #' @importFrom grDevices rainbow
+#' @importFrom gridExtra grid.arrange
 #' @importFrom scales pal_hue
 #' @importFrom utils combn
 #' @export venn.matrix
 #' @export
 venn.matrix <- function(
     object,
+    # top = NULL, bottom = NULL, left = NULL, right = NULL, # ?gridExtra::arrangeGrob cannot take ?grid::gList input
     palette = c('ggplot', 'rainbow'),
     ind = FALSE, 
     lty = 'blank',
@@ -155,15 +157,18 @@ venn.matrix <- function(
     alpha = alpha, cex = cex, 
     cat.default.pos	= cat.default.pos, cat.col = cat.col, cat.fontface = cat.fontface, cat.cex = cat.cex, ...)))
   
-  ret <- ret0 |> gsub_text_label.gList(
-    pattern = '^0$|^0\\%$|^0\n\\(0\\%\\)$|^0\\%\n\\(0\\)$', 
-    # '0%' # print.mode = 'percent'
-    # '0' # print.mode = 'raw'
-    # '0%\n(0)' # print.mode = c('percent', 'raw')
-    # '0\n(0%) # print.mode = c('raw', 'percent')
-    # these `pattern`s are determined by \CRANpkg{VennDiagram}
-    replacement = ''
-  )
+  ret <- ret0 |> 
+    gsub_text_label.gList(
+      pattern = '^0$|^0\\%$|^0\n\\(0\\%\\)$|^0\\%\n\\(0\\)$', 
+      # '0%' # print.mode = 'percent'
+      # '0' # print.mode = 'raw'
+      # '0%\n(0)' # print.mode = c('percent', 'raw')
+      # '0\n(0%) # print.mode = c('raw', 'percent')
+      # these `pattern`s are determined by \CRANpkg{VennDiagram}
+      replacement = ''
+    ) # |>
+    # grid.arrange(top = top, bottom = bottom, left = left, right = right)
+  # ?gridExtra::arrangeGrob cannot take ?grid::gList input!!!!
   
   attr(ret, which = 'text') <- paste0('`', colnames(object), '`', collapse = ', ') |>
     sprintf(fmt = 'Venn diagram of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
