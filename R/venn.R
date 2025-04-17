@@ -136,10 +136,12 @@ venn.matrix <- function(
   } else if (n_cat == 2L) {
     list(cross.area = sum(rowSums(object) == dimy[2L])) 
   } else {
-    cbs <- lapply(2:n_cat, FUN = combn, x = n_cat, simplify = FALSE) # all [c]om[b]ination indexe[s]
-    fcbs <- do.call(what = c, args = cbs) # make '[f]lat'
+    fcbs <- (2:n_cat) |>
+      lapply(FUN = combn, x = n_cat, simplify = FALSE) |> # all [c]om[b]ination indexe[s]
+      do.call(what = c) # make '[f]lat'
     names(fcbs) <- paste0('n', vapply(fcbs, FUN = paste, collapse = '', FUN.VALUE = ''))
-    lapply(fcbs, FUN = function(i) sum(rowSums(object[, i, drop = FALSE]) == length(i)))
+    fcbs |>
+      lapply(FUN = \(i) sum(rowSums(object[, i, drop = FALSE]) == length(i)))
   }
   
   ret0 <- do.call(what = switch(
