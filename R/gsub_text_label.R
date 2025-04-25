@@ -24,7 +24,7 @@ gsub_text_label.default <- function(pattern, replacement, x, ...) return(x) # ex
 gsub_text_label.grob <- function(pattern, replacement, x, ...) {
   # we expect class(x) to be c('text', 'grob', 'gDesc')
   if (!inherits(x, what = 'text')) return(x) # e.g., c('polygon', 'grob', 'gDesc')
-  x$label <- gsub(pattern = pattern, replacement = '', x = x$label, ...)
+  x$label <- gsub(pattern = pattern, replacement = replacement, x = x$label, ...)
   return(x)
 }
 

@@ -9,10 +9,6 @@
 #' 
 #' @param object see **Usage**
 #' 
-#' @param palette \link[base]{character} scalar, color palette to use.
-#' Default `ggplot2::ggplot` uses the default color palette \link[scales]{pal_hue}.
-#' Other options are `grDevices::rainbow`.
-#' 
 #' @param ind,lty,fill,alpha,cex,cat.col,cat.cex,cat.fontface,print.mode,cat.default.pos,... see function \link[VennDiagram]{draw.pairwise.venn}
 #' 
 #' @details
@@ -38,7 +34,7 @@
 #'   C = state.name[3:22],
 #'   D = state.name[4:23])
 #' x |> venn() |> plot()
-#' x |> venn(top = 'A Sample Venn Diagram', palette = 'rainbow') |> plot()
+#' x |> venn(top = 'A Sample Venn Diagram') |> plot()
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
 #' @name venn
@@ -79,7 +75,6 @@ venn.data.frame <- function(object, ...) {
 }
 
 #' @rdname venn
-#' @importFrom grDevices rainbow
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales pal_hue
 #' @importFrom utils combn
@@ -88,10 +83,9 @@ venn.data.frame <- function(object, ...) {
 venn.matrix <- function(
     object,
     # top = NULL, bottom = NULL, left = NULL, right = NULL, # ?gridExtra::arrangeGrob cannot take ?grid::gList input
-    palette = c('ggplot', 'rainbow'),
     ind = FALSE, 
     lty = 'blank',
-    fill = switch(match.arg(palette), ggplot = pal_hue(), rainbow = rainbow)(n = n_cat),
+    fill = pal_hue()(n = n_cat),
     alpha = .25,
     cex = 1,
     cat.col = fill,
@@ -144,22 +138,26 @@ venn.matrix <- function(
       lapply(FUN = \(i) sum(rowSums(object[, i, drop = FALSE]) == length(i)))
   }
   
-  ret0 <- do.call(what = switch(
-    n_cat, 
-    '1' = draw.single.venn, 
-    '2' = draw.pairwise.venn, 
-    '3' = draw.triple.venn,
-    '4' = draw.quad.venn, 
-    '5' = draw.quintuple.venn,
-    stop('cannot draw Venn diagram for 6 or more categories')
-  ), args = c(ag1, ag2, list(
-    print.mode = print.mode,
-    ind = ind, lty = lty, 
-    fill = fill, 
-    alpha = alpha, cex = cex, 
-    cat.default.pos	= cat.default.pos, cat.col = cat.col, cat.fontface = cat.fontface, cat.cex = cat.cex, ...)))
-  
-  ret <- ret0 |> 
+  ret <- c(
+    ag1, ag2, list(
+      print.mode = print.mode,
+      ind = ind, lty = lty, 
+      fill = fill, 
+      alpha = alpha, cex = cex, 
+      cat.default.pos	= cat.default.pos, cat.col = cat.col, 
+      cat.fontface = cat.fontface, cat.cex = cat.cex, 
+      ...
+    )
+  ) |>
+    do.call(what = switch(
+      n_cat, 
+      '1' = draw.single.venn, 
+      '2' = draw.pairwise.venn, 
+      '3' = draw.triple.venn,
+      '4' = draw.quad.venn, 
+      '5' = draw.quintuple.venn,
+      stop('cannot draw Venn diagram for 6 or more categories')
+  )) |> 
     gsub_text_label.gList(
       pattern = '^0$|^0\\%$|^0\n\\(0\\%\\)$|^0\\%\n\\(0\\)$', 
       # '0%' # print.mode = 'percent'
@@ -168,8 +166,8 @@ venn.matrix <- function(
       # '0\n(0%) # print.mode = c('raw', 'percent')
       # these `pattern`s are determined by \CRANpkg{VennDiagram}
       replacement = ''
-    ) # |>
-    # grid.arrange(top = top, bottom = bottom, left = left, right = right)
+    ) #|>
+    #grid.arrange(top = top, bottom = bottom, left = left, right = right)
   # ?gridExtra::arrangeGrob cannot take ?grid::gList input!!!!
   
   attr(ret, which = 'text') <- paste0('`', colnames(object), '`', collapse = ', ') |>

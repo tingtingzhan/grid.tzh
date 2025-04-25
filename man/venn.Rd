@@ -15,10 +15,9 @@ venn(object, ...)
 
 \method{venn}{matrix}(
   object,
-  palette = c("ggplot", "rainbow"),
   ind = FALSE,
   lty = "blank",
-  fill = switch(match.arg(palette), ggplot = pal_hue(), rainbow = rainbow)(n = n_cat),
+  fill = pal_hue()(n = n_cat),
   alpha = 0.25,
   cex = 1,
   cat.col = fill,
@@ -31,10 +30,6 @@ venn(object, ...)
 }
 \arguments{
 \item{object}{see \strong{Usage}}
-
-\item{palette}{\link[base]{character} scalar, color palette to use.
-Default \code{ggplot2::ggplot} uses the default color palette \link[scales]{pal_hue}.
-Other options are \code{grDevices::rainbow}.}
 
 \item{ind, lty, fill, alpha, cex, cat.col, cat.cex, cat.fontface, print.mode, cat.default.pos, ...}{see function \link[VennDiagram]{draw.pairwise.venn}}
 }
@@ -60,7 +55,7 @@ x = list(
   C = state.name[3:22],
   D = state.name[4:23])
 x |> venn() |> plot()
-x |> venn(top = 'A Sample Venn Diagram', palette = 'rainbow') |> plot()
+x |> venn(top = 'A Sample Venn Diagram') |> plot()
 }
 \seealso{
 Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, but not as elegantly as
