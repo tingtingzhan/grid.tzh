@@ -75,7 +75,7 @@ venn.data.frame <- function(object, ...) {
 }
 
 #' @rdname venn
-#' @importFrom gridExtra grid.arrange
+# @importFrom gridExtra grid.arrange
 #' @importFrom scales pal_hue
 #' @importFrom utils combn
 #' @export venn.matrix

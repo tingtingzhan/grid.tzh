@@ -4,16 +4,7 @@
 \alias{consort_rx}
 \title{Finetune Function \link[consort]{consort_plot}}
 \usage{
-consort_rx(
-  data,
-  orders,
-  sidebox_pattern = "^sidebox_",
-  ...,
-  top = NULL,
-  bottom = NULL,
-  left = NULL,
-  right = NULL
-)
+consort_rx(data, orders, sidebox_pattern = "^sidebox_", ...)
 }
 \arguments{
 \item{data}{\link[base]{data.frame}, see function \link[consort]{consort_plot}}
@@ -23,8 +14,6 @@ consort_rx(
 \item{sidebox_pattern}{\link[base]{regex}}
 
 \item{...}{additional parameters of \link[consort]{consort_plot}}
-
-\item{top, bottom, left, right}{see function \link[gridExtra]{arrangeGrob}}
 }
 \value{
 Function \code{\link[=consort_rx]{consort_rx()}} returns a
@@ -37,7 +26,6 @@ Some minor touch-ups of function \link[consort]{consort_plot}.
 Function \code{\link[=consort_rx]{consort_rx()}}
 \itemize{
 \item{finds the argument \code{side_box} of function \link[consort]{consort_plot}, from the argument of \code{orders}.}
-\item{adds top, bottom, left and/or right labels, via function \link[gridExtra]{arrangeGrob}.}
 \item{returns a \link[grid]{grob} object.}
 }
 }
