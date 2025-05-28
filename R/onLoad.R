@@ -14,7 +14,15 @@
     
   ) 
   
-  #options(mc.cores = switch(.Platform$OS.type, windows = 1L, detectCores()))
+  options(
+    
+    # mc.cores = switch(.Platform$OS.type, windows = 1L, detectCores()),
+    
+    use_unicode = TRUE
+    
+  )
+
+    
   
 }
 

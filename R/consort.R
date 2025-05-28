@@ -43,7 +43,7 @@ consort_rx <- function(
   
   ret <- consort_plot(
     data = data, orders = orders, 
-    side_box = grep(pattern = sidebox_pattern, x = nm, value = TRUE),
+    side_box = grepv(pattern = sidebox_pattern, x = nm),
     ...
   ) |>
     build_grid() #|>
