@@ -17,7 +17,7 @@ venn(object, ...)
   object,
   ind = FALSE,
   lty = "blank",
-  fill = pal_hue()(n = n_cat),
+  fill = pal_hue()(n = n),
   alpha = 0.25,
   cex = 1,
   cat.col = fill,
@@ -49,15 +49,14 @@ or
 \link[VennDiagram]{draw.quintuple.venn}.
 }
 \examples{
-x = list(
+list(
   A = state.name[1:20], 
   B = state.name[2:21], 
   C = state.name[3:22],
-  D = state.name[4:23])
-x |> venn() |> plot()
-x |> venn(top = 'A Sample Venn Diagram') |> plot()
+  D = state.name[4:23]) |> venn() |> plot()
 }
 \seealso{
-Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, but not as elegantly as
-function \code{\link[=venn.matrix]{venn.matrix()}}.
+Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,
+but not as elegantly as function \code{\link[=venn.matrix]{venn.matrix()}}.
 }
+\keyword{internal}

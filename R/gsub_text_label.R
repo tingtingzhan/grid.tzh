@@ -5,9 +5,6 @@
 #' 
 #' @param x see **Usage**
 #' 
-#' @note
-#' tzh may move function [gsub_text_label()] to a more basic package, maybe named \pkg{grid.tzh}, in future.
-#' 
 #' @keywords internal
 #' @name gsub_text_label
 #' @export

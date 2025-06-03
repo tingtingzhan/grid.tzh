@@ -18,7 +18,6 @@
 #' Function [consort_rx()]
 #' \itemize{
 #' \item{finds the argument `side_box` of function \link[consort]{consort_plot}, from the argument of `orders`.}
-# \item{adds top, bottom, left and/or right labels, via function \link[gridExtra]{arrangeGrob}.}
 #' \item{returns a \link[grid]{grob} object.}
 #' }
 #' 
@@ -27,13 +26,11 @@
 #' \link[grid]{grob} object.
 #' 
 #' @importFrom consort consort_plot build_grid
-# @importFrom gridExtra grid.arrange
 #' @export
 consort_rx <- function(
     data, 
     orders, 
     sidebox_pattern = '^sidebox_', 
-    #top = NULL, bottom = NULL, left = NULL, right = NULL,
     ...
 ) {
   
@@ -46,9 +43,7 @@ consort_rx <- function(
     side_box = grepv(pattern = sidebox_pattern, x = nm),
     ...
   ) |>
-    build_grid() #|>
-    #grid.arrange(top = top, bottom = bottom, left = left, right = right)
-  # gridExtra::grid.arrange is more friendly than gridExtra::arrangeGrob
+    build_grid()
   
   attr(ret, which = 'text') <- 'Consort diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.'
 

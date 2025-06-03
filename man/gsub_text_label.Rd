@@ -23,7 +23,4 @@ gsub_text_label(pattern, replacement, x, ...)
 \description{
 Modify \verb{$label} of a \code{'text'} \link[grid]{grob}
 }
-\note{
-tzh may move function \code{\link[=gsub_text_label]{gsub_text_label()}} to a more basic package, maybe named \pkg{grid.tzh}, in future.
-}
 \keyword{internal}

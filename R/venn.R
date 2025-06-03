@@ -24,17 +24,16 @@
 #' Function [venn()] returns a \link[grid]{gList} object. 
 #' 
 #' @seealso 
-#' Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, but not as elegantly as 
-#' function [venn.matrix()].
+#' Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, 
+#' but not as elegantly as function [venn.matrix()].
 #'
 #' @examples 
-#' x = list(
+#' list(
 #'   A = state.name[1:20], 
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22],
-#'   D = state.name[4:23])
-#' x |> venn() |> plot()
-#' x |> venn(top = 'A Sample Venn Diagram') |> plot()
+#'   D = state.name[4:23]) |> venn() |> plot()
+#' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
 #' @name venn
@@ -75,17 +74,15 @@ venn.data.frame <- function(object, ...) {
 }
 
 #' @rdname venn
-# @importFrom gridExtra grid.arrange
 #' @importFrom scales pal_hue
 #' @importFrom utils combn
 #' @export venn.matrix
 #' @export
 venn.matrix <- function(
     object,
-    # top = NULL, bottom = NULL, left = NULL, right = NULL, # ?gridExtra::arrangeGrob cannot take ?grid::gList input
     ind = FALSE, 
     lty = 'blank',
-    fill = pal_hue()(n = n_cat),
+    fill = pal_hue()(n = n),
     alpha = .25,
     cex = 1,
     cat.col = fill,
@@ -117,21 +114,21 @@ venn.matrix <- function(
   }
   
   dimy <- dim(object)
-  n_cat <- dimy[2L]
+  n <- dimy[2L]
   
-  area <- .colSums(object, m = dimy[1L], n = n_cat, na.rm = FALSE)
+  area <- .colSums(object, m = dimy[1L], n = n, na.rm = FALSE)
   
   ag1 <- c(
     list(category = paste0(colnames(object), '\n(', area, ')')),
-    setNames(as.list.default(area), nm = if (n_cat == 1L) 'area' else paste0('area', seq_len(n_cat)))
+    setNames(as.list.default(area), nm = if (n == 1L) 'area' else paste0('area', seq_len(n)))
   )
-  ag2 <- if (n_cat == 1L) {
+  ag2 <- if (n == 1L) {
     NULL 
-  } else if (n_cat == 2L) {
+  } else if (n == 2L) {
     list(cross.area = sum(rowSums(object) == dimy[2L])) 
   } else {
-    fcbs <- (2:n_cat) |>
-      lapply(FUN = combn, x = n_cat, simplify = FALSE) |> # all [c]om[b]ination indexe[s]
+    fcbs <- (2:n) |>
+      lapply(FUN = combn, x = n, simplify = FALSE) |> # all [c]om[b]ination indexe[s]
       do.call(what = c) # make '[f]lat'
     names(fcbs) <- paste0('n', vapply(fcbs, FUN = paste, collapse = '', FUN.VALUE = ''))
     fcbs |>
@@ -145,12 +142,13 @@ venn.matrix <- function(
       fill = fill, 
       alpha = alpha, cex = cex, 
       cat.default.pos	= cat.default.pos, cat.col = cat.col, 
-      cat.fontface = cat.fontface, cat.cex = cat.cex, 
+      cat.fontface = cat.fontface, 
+      cat.cex = cat.cex, 
       ...
     )
   ) |>
     do.call(what = switch(
-      n_cat, 
+      n, 
       '1' = draw.single.venn, 
       '2' = draw.pairwise.venn, 
       '3' = draw.triple.venn,
@@ -166,9 +164,7 @@ venn.matrix <- function(
       # '0\n(0%) # print.mode = c('raw', 'percent')
       # these `pattern`s are determined by \CRANpkg{VennDiagram}
       replacement = ''
-    ) #|>
-    #grid.arrange(top = top, bottom = bottom, left = left, right = right)
-  # ?gridExtra::arrangeGrob cannot take ?grid::gList input!!!!
+    )
   
   attr(ret, which = 'text') <- paste0('`', colnames(object), '`', collapse = ', ') |>
     sprintf(fmt = 'Venn diagram of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
