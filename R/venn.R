@@ -75,7 +75,7 @@ venn.data.frame <- function(object, ...) {
 
 #' @rdname venn
 #' @importFrom scales pal_hue
-#' @importFrom utils combn
+#' @importFrom utils combn bibentry
 #' @export venn.matrix
 #' @export
 venn.matrix <- function(
@@ -167,7 +167,20 @@ venn.matrix <- function(
     )
   
   attr(ret, which = 'text') <- paste0('`', colnames(object), '`', collapse = ', ') |>
-    sprintf(fmt = 'Venn diagram of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
+    sprintf(fmt = 'Venn diagram [@Venn1880] of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
+  
+  attr(ret, which = 'bibentry') <- bibentry(
+    bibtype = 'article', key = 'Venn1880',
+    author = 'John Venn M.A.',
+    title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
+    journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
+    volume = '10',
+    number = '59',
+    pages = '1--18',
+    year = '1880',
+    publisher = 'Taylor & Francis',
+    doi = '10.1080/14786448008626877'
+  )
   
   return(ret)
   
