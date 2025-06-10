@@ -171,7 +171,7 @@ venn.matrix <- function(
   
   attr(ret, which = 'bibentry') <- bibentry(
     bibtype = 'article', key = 'Venn1880',
-    author = 'John Venn M.A.',
+    author = 'John Venn',
     title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
     journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
     volume = '10',
