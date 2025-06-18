@@ -25,6 +25,7 @@
 #' Function [consort_rx()] returns a 
 #' \link[grid]{grob} object.
 #' 
+#' @keywords internal
 #' @importFrom consort consort_plot build_grid
 #' @export
 consort_rx <- function(
@@ -54,9 +55,6 @@ consort_rx <- function(
 
 
 
-
-
-# old name `consort_eligible`
 
 
 #' @title sidebox

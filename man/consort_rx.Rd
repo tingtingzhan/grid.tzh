@@ -29,3 +29,4 @@ Function \code{\link[=consort_rx]{consort_rx()}}
 \item{returns a \link[grid]{grob} object.}
 }
 }
+\keyword{internal}

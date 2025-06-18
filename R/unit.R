@@ -24,7 +24,7 @@
 #' (x2 = unit(rnorm(10), units = 'cm'))
 #' x1 > x2
 #' 
-#' 
+#' @keywords internal
 #' @name grid_unit
 #' @importFrom grid convertUnit
 #' @export `units<-.unit`
