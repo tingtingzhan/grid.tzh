@@ -49,11 +49,15 @@ or
 \link[VennDiagram]{draw.quintuple.venn}.
 }
 \examples{
-list(
+m = list(
   A = state.name[1:20], 
   B = state.name[2:21], 
   C = state.name[3:22],
-  D = state.name[4:23]) |> venn() |> plot()
+  D = state.name[4:23]) |> venn() 
+m |> plot()
+library(rmd.tzh); list(
+  '`venn`' = m
+) |> render_(file = 'gList')
 }
 \seealso{
 Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,

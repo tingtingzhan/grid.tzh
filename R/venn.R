@@ -28,11 +28,15 @@
 #' but not as elegantly as function [venn.matrix()].
 #'
 #' @examples 
-#' list(
+#' m = list(
 #'   A = state.name[1:20], 
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22],
-#'   D = state.name[4:23]) |> venn() |> plot()
+#'   D = state.name[4:23]) |> venn() 
+#' m |> plot()
+#' library(rmd.tzh); list(
+#'   '`venn`' = m
+#' ) |> render_(file = 'gList')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -166,10 +170,10 @@ venn.matrix <- function(
       replacement = ''
     )
   
-  attr(ret, which = 'text') <- paste0('`', colnames(object), '`', collapse = ', ') |>
+  txt <- paste0('`', colnames(object), '`', collapse = ', ') |>
     sprintf(fmt = 'Venn diagram [@Venn1880] of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
   
-  attr(ret, which = 'bibentry') <- bibentry(
+  attr(txt, which = 'bibentry') <- bibentry(
     bibtype = 'article', key = 'Venn1880',
     author = 'John Venn',
     title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
@@ -182,9 +186,12 @@ venn.matrix <- function(
     doi = '10.1080/14786448008626877'
   )
   
+  attr(ret, which = 'text') <- txt
+  
   return(ret)
   
 }
+
 
 
 

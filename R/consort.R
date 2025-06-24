@@ -46,12 +46,36 @@ consort_rx <- function(
   ) |>
     build_grid()
   
-  attr(ret, which = 'text') <- 'Consort diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.'
-
+  attr(ret, which = 'text') <- Sprintf_consort()
+  
   return(ret)
   # returned object class c('gtable', 'gTree', 'grob', 'gDesc')
   
 }
+
+
+
+#' @title CONSORT Description
+#' 
+#' @keywords internal
+#' @importFrom utils bibentry
+#' @export
+Sprintf_consort <- function() {
+  ret <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.'
+  attr(ret, which = 'bibentry') <- bibentry(
+    bibtype = 'article', key = 'Schulz10',
+    author = 'Kenneth F. Schulz and Douglas G. Altman and David Moher',
+    title = 'CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials',
+    volume = '340',
+    year = '2010',
+    doi = '10.1136/bmj.c332',
+    journal = 'BMJ'
+  )
+  return(ret)
+}
+
+
+
 
 
 

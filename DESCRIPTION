@@ -13,4 +13,4 @@ RoxygenNote: 7.3.2
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5)
-Imports: consort (== 1.2.2), VennDiagram (== 1.7.3), scales (== 1.4.0)
+Imports: consort (== 1.2.2), VennDiagram (== 1.7.3), scales (== 1.4.0), rmd.tzh
