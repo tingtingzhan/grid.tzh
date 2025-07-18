@@ -2,33 +2,33 @@
 
 md_grid <- function(x, xnm, ...) {
   
-  fig.cap <- attr(x, which = 'fig.cap', exact = TRUE)
-  txt <- attr(x, which = 'text', exact = TRUE)
-  
   #label <- attr(x, which = 'label', exact = TRUE)
   # https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html
   # rmarkdown does *not* provide cross-referencing 
   
-  ret <- c(
-    txt,
+  return(list(
+    
+    attr(x, which = 'text', exact = TRUE),
+    
     '\n',
     '```{r}', 
     # let \pkg{grid} does not figure out the width and height very perfectly
     (attr(x, which = 'fig.height', exact = TRUE) %||% 4) |> sprintf(fmt = '#| fig-height: %.1f'),
     (attr(x, which = 'fig.width', exact = TRUE) %||% 7) |> sprintf(fmt = '#| fig-width: %.1f'),
-    fig.cap |> sprintf(fmt = '#| fig-cap: %s'), # len-0 compatible
+    x |>
+      attr(which = 'fig.cap', exact = TRUE) |> 
+      sprintf(fmt = '#| fig-cap: %s'), # len-0 compatible
     # 'grid::grid.newpage()', # no need!!
     sprintf(fmt = '%s |> grid::grid.draw()', xnm), 
     # ?grid:::grid.draw.gList
     # ?grid:::grid.draw.grob
     # etc.
-    '```'
-  )
-  bib <- txt |>
-    attr(which = 'bibentry', exact = TRUE)
-  if (length(bib)) attr(ret, which = 'bibentry') <- bib
-  return(ret)
-  
+    '```',
+    '<any-text>',
+    
+    '\n\n'
+  ))
+
 }
 
 
