@@ -171,7 +171,7 @@ venn.matrix <- function(
     )
   
   txt <- paste0('`', colnames(object), '`', collapse = ', ') |>
-    sprintf(fmt = 'Venn diagram [@Venn1880] of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
+    sprintf(fmt = '@Venn1880 diagram of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
   
   attr(txt, which = 'bibentry') <- bibentry(
     bibtype = 'article', key = 'Venn1880',
