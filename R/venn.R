@@ -34,9 +34,7 @@
 #'   C = state.name[3:22],
 #'   D = state.name[4:23]) |> venn() 
 #' m |> plot()
-#' library(rmd.tzh); list(
-#'   '`venn`' = m
-#' ) |> render_(file = 'gList')
+#' library(rmd.tzh); list('`venn`' = m) |> render_(file = 'gList')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -170,25 +168,62 @@ venn.matrix <- function(
       replacement = ''
     )
   
-  txt <- paste0('`', colnames(object), '`', collapse = ', ') |>
-    sprintf(fmt = '@Venn1880 diagram of %s is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.')
-  
-  attr(txt, which = 'bibentry') <- bibentry(
-    bibtype = 'article', key = 'Venn1880',
-    author = 'John Venn',
-    title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
-    journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
-    volume = '10',
-    number = '59',
-    pages = '1--18',
-    year = '1880',
-    publisher = 'Taylor & Francis',
-    doi = '10.1080/14786448008626877'
-  )
-  
-  attr(ret, which = 'text') <- txt
-  
+  class(ret) <- c('venn', class(ret)) |> unique.default()
   return(ret)
+}
+
+
+
+
+#' @title Markdown Lines for `venn`
+#' 
+#' @param x `venn`
+#' 
+#' @param xnm ..
+#' 
+#' @param ... ..
+#' 
+#' @examples
+#' # see ?venn
+#' @keywords internal
+#' @importFrom rmd.tzh md_
+#' @importFrom methods new
+#' @importFrom utils bibentry
+#' @export md_.venn
+#' @export
+md_.venn <- function(x, xnm, ...) {
+  
+  z1 <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
+    new(Class = 'md_lines', bibentry = bibentry(
+      bibtype = 'article', key = 'Venn1880',
+      author = 'John Venn',
+      title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
+      journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
+      volume = '10',
+      number = '59',
+      pages = '1--18',
+      year = '1880',
+      publisher = 'Taylor & Francis',
+      doi = '10.1080/14786448008626877'
+    ))
+  
+  z2 <- c(
+    '```{r}', 
+    # let \pkg{grid} does not figure out the width and height very perfectly
+    (attr(x, which = 'fig.height', exact = TRUE) %||% 4) |> sprintf(fmt = '#| fig-height: %.1f'),
+    (attr(x, which = 'fig.width', exact = TRUE) %||% 7) |> sprintf(fmt = '#| fig-width: %.1f'),
+    x |>
+      attr(which = 'fig.cap', exact = TRUE) |> 
+      sprintf(fmt = '#| fig-cap: %s'), # len-0 compatible
+    # 'grid::grid.newpage()', # no need!!
+    sprintf(fmt = '%s |> grid::grid.draw()', xnm), 
+    # ?grid:::grid.draw.gList
+    # ?grid:::grid.draw.grob
+    # etc.
+    '```'
+  ) |> new(Class = 'md_lines')
+
+  c(z1, z2) # ?rmd.tzh::c.md_lines
   
 }
 
