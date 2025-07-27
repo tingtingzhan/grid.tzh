@@ -4,14 +4,12 @@
 \alias{md_.venn}
 \title{Markdown Lines for \code{venn}}
 \usage{
-\method{md_}{venn}(x, xnm, ...)
+\method{md_}{venn}(x, ...)
 }
 \arguments{
 \item{x}{\code{venn}}
 
-\item{xnm}{..}
-
-\item{...}{..}
+\item{...}{additional parameters of function \link[rmd.tzh]{md_.default}}
 }
 \description{
 Markdown Lines for \code{venn}

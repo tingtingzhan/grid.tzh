@@ -4,14 +4,12 @@
 \alias{md_.consort}
 \title{Markdown Lines for \link[consort]{consort_plot}}
 \usage{
-\method{md_}{consort}(x, xnm, ...)
+\method{md_}{consort}(x, ...)
 }
 \arguments{
 \item{x}{a \link[consort]{consort_plot}}
 
-\item{xnm}{..}
-
-\item{...}{..}
+\item{...}{additional parameters of function \link[rmd.tzh]{md_.default}}
 }
 \description{
 Markdown Lines for \link[consort]{consort_plot}

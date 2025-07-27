@@ -173,27 +173,44 @@ venn.matrix <- function(
 }
 
 
+#' @title [print.venn]
+#' 
+#' @param x ..
+#' 
+#' @param ... ..
+#' 
+#' @note
+#' So that I can simply use \link[rmd.tzh]{md_.default} :)
+#' 
+#' @importFrom grid grid.newpage grid.draw
+#' @export print.venn
+#' @export
+print.venn <- function(x, ...) {
+  grid.newpage()
+  grid.draw(x)
+}
+
+
+
 
 
 #' @title Markdown Lines for `venn`
 #' 
 #' @param x `venn`
 #' 
-#' @param xnm ..
-#' 
-#' @param ... ..
+#' @param ... additional parameters of function \link[rmd.tzh]{md_.default}
 #' 
 #' @examples
 #' # see ?venn
 #' @keywords internal
-#' @importFrom rmd.tzh md_
+#' @importFrom rmd.tzh md_ md_.default
 #' @importFrom methods new
 #' @importFrom utils bibentry
 #' @export md_.venn
 #' @export
-md_.venn <- function(x, xnm, ...) {
+md_.venn <- function(x, ...) {
   
-  z1 <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
+  attr(x, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
     new(Class = 'md_lines', bibentry = bibentry(
       bibtype = 'article', key = 'Venn1880',
       author = 'John Venn',
@@ -205,37 +222,10 @@ md_.venn <- function(x, xnm, ...) {
       year = '1880',
       publisher = 'Taylor & Francis',
       doi = '10.1080/14786448008626877'
-    ))
+    ), package = 'VennDiagram')
   
-  z2 <- c(
-    '```{r}', 
-    # let \pkg{grid} does not figure out the width and height very perfectly
-    (attr(x, which = 'fig.height', exact = TRUE) %||% 4) |> sprintf(fmt = '#| fig-height: %.1f'),
-    (attr(x, which = 'fig.width', exact = TRUE) %||% 7) |> sprintf(fmt = '#| fig-width: %.1f'),
-    x |>
-      attr(which = 'fig.cap', exact = TRUE) |> 
-      sprintf(fmt = '#| fig-cap: %s'), # len-0 compatible
-    # 'grid::grid.newpage()', # no need!!
-    sprintf(fmt = '%s |> grid::grid.draw()', xnm), 
-    # ?grid:::grid.draw.gList
-    # ?grid:::grid.draw.grob
-    # etc.
-    '```'
-  ) |> new(Class = 'md_lines')
-
-  c(z1, z2) # ?rmd.tzh::c.md_lines
+  md_.default(x, ...)
   
 }
-
-
-
-
-
-
-
-
-
-
-
 
 

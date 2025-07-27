@@ -52,9 +52,7 @@ consort_rx <- function(
 #' 
 #' @param x a \link[consort]{consort_plot}
 #' 
-#' @param xnm ..
-#' 
-#' @param ... ..
+#' @param ... additional parameters of function \link[rmd.tzh]{md_.default}
 #' 
 #' @examples
 #' # example from \pkg{consort} vignette
@@ -71,14 +69,14 @@ consort_rx <- function(
 #' library(rmd.tzh); list(consort = out) |> 
 #'   render_(file = 'consort')
 #' @keywords internal
-#' @importFrom rmd.tzh md_
+#' @importFrom rmd.tzh md_ md_.default
 #' @importFrom methods new
 #' @importFrom utils bibentry
 #' @export md_.consort
 #' @export
-md_.consort <- function(x, xnm, ...) {
+md_.consort <- function(x, ...) {
   
-  z1 <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
+  attr(x, which = 'text') <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
     new(Class = 'md_lines', bibentry = bibentry(
       bibtype = 'article', key = 'Schulz10',
       author = 'Kenneth F. Schulz and Douglas G. Altman and David Moher',
@@ -87,28 +85,15 @@ md_.consort <- function(x, xnm, ...) {
       year = '2010',
       doi = '10.1136/bmj.c332',
       journal = 'BMJ'
-    ))
+    ), package = 'consort')
   
-  z2 <- c(
-    '```{r}', 
-    # let \pkg{grid} does not figure out the width and height very perfectly
-    (attr(x, which = 'fig.height', exact = TRUE) %||% 4) |> sprintf(fmt = '#| fig-height: %.1f'),
-    (attr(x, which = 'fig.width', exact = TRUE) %||% 7) |> sprintf(fmt = '#| fig-width: %.1f'),
-    x |>
-      attr(which = 'fig.cap', exact = TRUE) |> 
-      sprintf(fmt = '#| fig-cap: %s'), # len-0 compatible
-    # 'grid::grid.newpage()', # no need!!
-    sprintf(fmt = '%s |> consort::build_grid() |> grid::grid.draw()', xnm), 
-    # ?grid:::grid.draw.gList
-    # ?grid:::grid.draw.grob
-    # etc.
-    '```'
-  ) |> 
-    new(Class = 'md_lines')
-  
-  c(z1, z2) # ?rmd.tzh::c.md_lines
+  md_.default(x, ...)
   
 }
+
+
+
+
 
 
 
