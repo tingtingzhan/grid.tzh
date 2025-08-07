@@ -34,7 +34,7 @@
 #'   C = state.name[3:22],
 #'   D = state.name[4:23]) |> venn() 
 #' m |> plot()
-#' library(rmd.tzh); list('`venn`' = m) |> render_(file = 'gList')
+#' list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -203,7 +203,7 @@ print.venn <- function(x, ...) {
 #' @examples
 #' # see ?venn
 #' @keywords internal
-#' @importFrom rmd.tzh md_ md_.default
+#' @importFrom rmd.tzh md_
 #' @importFrom methods new
 #' @importFrom utils bibentry
 #' @export md_.venn
@@ -224,7 +224,9 @@ md_.venn <- function(x, ...) {
       doi = '10.1080/14786448008626877'
     ), package = 'VennDiagram')
   
-  md_.default(x, ...)
+  NextMethod(generic = 'md_') # ?rmd.tzh::md_.default
+  # works here, but not in [md_.consort()]
+  # tzh does not know why..
   
 }
 

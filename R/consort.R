@@ -66,8 +66,8 @@ consort_rx <- function(
 #'   followup = 'Followup'
 #' ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
 #' 
-#' library(rmd.tzh); list(consort = out) |> 
-#'   render_(file = 'consort')
+#' list(consort = out) |> 
+#'   rmd.tzh::render_(file = 'consort')
 #' @keywords internal
 #' @importFrom rmd.tzh md_ md_.default
 #' @importFrom methods new
@@ -77,7 +77,7 @@ consort_rx <- function(
 md_.consort <- function(x, ...) {
   
   attr(x, which = 'text') <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
-    new(Class = 'md_lines', bibentry = bibentry(
+    new(Class = 'md_lines', package = 'consort', bibentry = bibentry(
       bibtype = 'article', key = 'Schulz10',
       author = 'Kenneth F. Schulz and Douglas G. Altman and David Moher',
       title = 'CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials',
@@ -85,7 +85,13 @@ md_.consort <- function(x, ...) {
       year = '2010',
       doi = '10.1136/bmj.c332',
       journal = 'BMJ'
-    ), package = 'consort')
+    ))
+  
+  # NextMethod(generic = 'md_') 
+  # does NOT work! 
+  # \link[consort]{consort_plot} returns an object of class "consort" "list"
+  # dispatch to \link[rmd.tzh]{md_.list} 
+  # instead of \link[rmd.tzh]{md_.default} 
   
   md_.default(x, ...)
   

@@ -26,7 +26,7 @@ out = consort_plot(data = dispos.data, orders = c(
   followup = 'Followup'
 ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
 
-library(rmd.tzh); list(consort = out) |> 
-  render_(file = 'consort')
+list(consort = out) |> 
+  rmd.tzh::render_(file = 'consort')
 }
 \keyword{internal}
