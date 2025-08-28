@@ -18,15 +18,16 @@ Markdown Lines for \link[consort]{consort_plot}
 # example from \pkg{consort} vignette
 library(consort)
 data(dispos.data)
-out = consort_plot(data = dispos.data, orders = c(
+cs1 = consort_plot(data = dispos.data, orders = c(
   trialno = 'Population',
   exclusion = 'Excluded',
   trialno = 'Allocated',
   subjid_notdosed = 'Not dosed',
   followup = 'Followup'
 ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
-
-list(consort = out) |> 
+cs2 = cs1 |> 
+  build_grid()
+list(consort1 = cs1, consort2 = cs2) |> 
   rmd.tzh::render_(file = 'consort')
 }
 \keyword{internal}

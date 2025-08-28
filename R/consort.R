@@ -58,15 +58,16 @@ consort_rx <- function(
 #' # example from \pkg{consort} vignette
 #' library(consort)
 #' data(dispos.data)
-#' out = consort_plot(data = dispos.data, orders = c(
+#' cs1 = consort_plot(data = dispos.data, orders = c(
 #'   trialno = 'Population',
 #'   exclusion = 'Excluded',
 #'   trialno = 'Allocated',
 #'   subjid_notdosed = 'Not dosed',
 #'   followup = 'Followup'
 #' ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
-#' 
-#' list(consort = out) |> 
+#' cs2 = cs1 |> 
+#'   build_grid()
+#' list(consort1 = cs1, consort2 = cs2) |> 
 #'   rmd.tzh::render_(file = 'consort')
 #' @keywords internal
 #' @importFrom rmd.tzh md_ md_.default
@@ -93,7 +94,7 @@ md_.consort <- function(x, ...) {
   # dispatch to \link[rmd.tzh]{md_.list} 
   # instead of \link[rmd.tzh]{md_.default} 
   
-  md_.default(x, ...)
+  md_.default(x, ...) # ?consort:::print.consort
   
 }
 
