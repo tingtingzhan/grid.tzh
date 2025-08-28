@@ -34,7 +34,7 @@ md_.grob <- function(x, xnm, ...) {
       sprintf(fmt = '#| fig-width: %.1f'),
     x |>
       attr(which = 'fig-cap', exact = TRUE) |> 
-      sprintf(fmt = '#| fig-cap: %s'),
+      sprintf(fmt = '#| fig-cap: \"%s\"'),
     # end of len-0 compatible
     
     xnm |> sprintf(fmt = 'grid::grid.draw(%s)'), 
