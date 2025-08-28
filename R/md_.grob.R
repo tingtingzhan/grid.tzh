@@ -37,7 +37,7 @@ md_.grob <- function(x, xnm, ...) {
       sprintf(fmt = '#| fig-cap: %s'),
     # end of len-0 compatible
     
-    xnm |> sprintf(fmt = 'grid.draw(%s)'), 
+    xnm |> sprintf(fmt = 'grid::grid.draw(%s)'), 
 
     '```'
   ) |> new(Class = 'md_lines')
