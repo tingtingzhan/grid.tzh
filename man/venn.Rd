@@ -15,6 +15,7 @@ venn(object, ...)
 
 \method{venn}{matrix}(
   object,
+  all. = FALSE,
   ind = FALSE,
   lty = "blank",
   fill = pal_hue()(n = n),
@@ -30,6 +31,8 @@ venn(object, ...)
 }
 \arguments{
 \item{object}{see \strong{Usage}}
+
+\item{all.}{\link[base]{logical} scalar, whether to add a big circle for all subjects. Default \code{FALSE}}
 
 \item{ind, lty, fill, alpha, cex, cat.col, cat.cex, cat.fontface, print.mode, cat.default.pos, ...}{see function \link[VennDiagram]{draw.pairwise.venn}}
 }
@@ -52,8 +55,7 @@ or
 m = list(
   A = state.name[1:20], 
   B = state.name[2:21], 
-  C = state.name[3:22],
-  D = state.name[4:23]) |> venn() 
+  C = state.name[3:22]) |> venn() 
 m |> plot()
 list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
 }

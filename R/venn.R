@@ -9,6 +9,8 @@
 #' 
 #' @param object see **Usage**
 #' 
+#' @param all. \link[base]{logical} scalar, whether to add a big circle for all subjects. Default `FALSE`
+#' 
 #' @param ind,lty,fill,alpha,cex,cat.col,cat.cex,cat.fontface,print.mode,cat.default.pos,... see function \link[VennDiagram]{draw.pairwise.venn}
 #' 
 #' @details
@@ -31,8 +33,7 @@
 #' m = list(
 #'   A = state.name[1:20], 
 #'   B = state.name[2:21], 
-#'   C = state.name[3:22],
-#'   D = state.name[4:23]) |> venn() 
+#'   C = state.name[3:22]) |> venn() 
 #' m |> plot()
 #' list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
 #' @keywords internal
@@ -72,7 +73,9 @@ venn.list <- function(object, ...) {
 #' @export
 venn.data.frame <- function(object, ...) {
   obj <- object[complete.cases(object), ]
-  venn.list(as.list.data.frame(obj), ...)
+  obj |> 
+    as.list.data.frame() |>
+    venn.list(...)
 }
 
 #' @rdname venn
@@ -82,6 +85,7 @@ venn.data.frame <- function(object, ...) {
 #' @export
 venn.matrix <- function(
     object,
+    all. = FALSE,
     ind = FALSE, 
     lty = 'blank',
     fill = pal_hue()(n = n),
@@ -97,6 +101,10 @@ venn.matrix <- function(
   if (anyNA(object)) stop('do not allow missing in \'matrix\' input for Venn diagram')
   if (typeof(object) != 'logical') stop('`object` must be binary/logical matrix')
   if (!length(object)) return(invisible())
+  
+  if (all. && all(colMeans(object) < 1)) {
+    object <- cbind(object, All = TRUE)
+  }
   
   rid <- (rowSums(object) == 0) # all-FALSE rows
   if (all(rid)) return(invisible())
