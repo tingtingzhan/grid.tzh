@@ -50,6 +50,7 @@ venn <- function(object, ...) {
 #' @export venn.list
 #' @export
 venn.list <- function(object, ...) {
+  object <- object[lengths(object) > 0L]
   typ <- vapply(object, FUN = typeof, FUN.VALUE = '')
   if (!all(duplicated.default(typ)[-1L])) stop('all elements of `object` must be the same typeof')
   obj <- switch(typ[1L], logical = {
