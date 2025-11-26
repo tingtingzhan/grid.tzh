@@ -16,6 +16,7 @@ venn(object, ...)
 \method{venn}{matrix}(
   object,
   all. = FALSE,
+  all.nm = "All",
   ind = FALSE,
   lty = "blank",
   fill = pal_hue()(n = n),
@@ -33,6 +34,8 @@ venn(object, ...)
 \item{object}{see \strong{Usage}}
 
 \item{all.}{\link[base]{logical} scalar, whether to add a big circle for all subjects. Default \code{FALSE}}
+
+\item{all.nm}{\link[base]{character} scalar, name of all-circle (if \code{all. == TRUE})}
 
 \item{ind, lty, fill, alpha, cex, cat.col, cat.cex, cat.fontface, print.mode, cat.default.pos, ...}{see function \link[VennDiagram]{draw.pairwise.venn}}
 }

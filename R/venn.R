@@ -11,6 +11,8 @@
 #' 
 #' @param all. \link[base]{logical} scalar, whether to add a big circle for all subjects. Default `FALSE`
 #' 
+#' @param all.nm \link[base]{character} scalar, name of all-circle (if `all. == TRUE`)
+#' 
 #' @param ind,lty,fill,alpha,cex,cat.col,cat.cex,cat.fontface,print.mode,cat.default.pos,... see function \link[VennDiagram]{draw.pairwise.venn}
 #' 
 #' @details
@@ -86,7 +88,7 @@ venn.data.frame <- function(object, ...) {
 #' @export
 venn.matrix <- function(
     object,
-    all. = FALSE,
+    all. = FALSE, all.nm = 'All',
     ind = FALSE, 
     lty = 'blank',
     fill = pal_hue()(n = n),
@@ -105,6 +107,7 @@ venn.matrix <- function(
   
   if (all. && all(colMeans(object) < 1)) {
     object <- cbind(object, All = TRUE)
+    colnames(object)[ncol(object)] <- all.nm
   }
   
   rid <- (rowSums(object) == 0) # all-FALSE rows
