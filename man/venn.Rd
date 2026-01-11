@@ -59,7 +59,7 @@ m = list(
   A = state.name[1:20], 
   B = state.name[2:21], 
   C = state.name[3:22]) |> venn() 
-m |> plot()
+m
 list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
 }
 \seealso{

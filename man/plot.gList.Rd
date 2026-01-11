@@ -19,4 +19,6 @@ Plot \link[grid]{gList} Object
 }
 \note{
 We don't have similar function in package \pkg{grid} as of R version 4.5.
+
+Currently not needed as we have function(s) \code{VennDiagram:::plot.VennDiagram}.
 }

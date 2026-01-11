@@ -161,13 +161,13 @@ sidebox <- function(pattern = '^sidebox_', data, ...) {
 #' @export
 paste_nna_ <- function(..., sep = '; ') {
   
-  (function(..., collapse) {
-    x <- unique(c(...))
-    if (identical(x, NA_character_)) return(NA_character_)
-    x0 <- x[!is.na(x)]
-    paste(x0, collapse = collapse)
-  }) |>
-    .mapply(dots = list(...), MoreArgs = list(collapse = sep)) |>
+  list(...) |>
+    .mapply(FUN = \(..., collapse) {
+      x <- unique(c(...))
+      if (identical(x, NA_character_)) return(NA_character_)
+      x0 <- x[!is.na(x)]
+      paste(x0, collapse = collapse)
+    }, dots = _, MoreArgs = list(collapse = sep)) |>
     unlist()
 
 }

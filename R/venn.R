@@ -36,7 +36,7 @@
 #'   A = state.name[1:20], 
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22]) |> venn() 
-#' m |> plot()
+#' m
 #' list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
@@ -180,35 +180,24 @@ venn.matrix <- function(
       replacement = ''
     )
   
-  class(ret) <- c('venn', class(ret)) |> unique.default()
   return(ret)
 }
 
 
-#' @title [print.venn]
-#' 
-#' @param x ..
-#' 
-#' @param ... ..
-#' 
-#' @note
-#' So that I can simply use \link[rmd.tzh]{md_.default} :)
-#' 
-#' @importFrom grid grid.newpage grid.draw
-#' @export print.venn
-#' @export
-print.venn <- function(x, ...) {
-  grid.newpage()
-  grid.draw(x)
-}
+
+
+
+# @title [print.venn()]
+# @note
+# Removed as \CRANpkg{VennDiagram} v1.8.0 adds the `S3` method `VennDiagram:::print.VennDiagram`.
 
 
 
 
 
-#' @title Markdown Lines for `venn`
+#' @title Markdown Lines for `VennDiagram`
 #' 
-#' @param x `venn`
+#' @param x a `VennDiagram`
 #' 
 #' @param ... additional parameters of function \link[rmd.tzh]{md_.default}
 #' 
@@ -218,9 +207,9 @@ print.venn <- function(x, ...) {
 #' @importFrom rmd.tzh md_
 #' @importFrom methods new
 #' @importFrom utils bibentry
-#' @export md_.venn
+#' @export md_.VennDiagram
 #' @export
-md_.venn <- function(x, ...) {
+md_.VennDiagram <- function(x, ...) {
   
   attr(x, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
     new(Class = 'md_lines', bibentry = bibentry(

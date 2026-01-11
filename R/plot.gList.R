@@ -16,6 +16,8 @@
 #' @note
 #' We don't have similar function in package \pkg{grid} as of R version 4.5.
 #' 
+#' Currently not needed as we have function(s) `VennDiagram:::plot.VennDiagram`.
+#' 
 #' @importFrom grid grid.newpage grid.draw
 #' @export plot.gList
 #' @export
