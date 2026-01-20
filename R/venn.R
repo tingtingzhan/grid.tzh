@@ -37,7 +37,7 @@
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22]) |> venn() 
 #' m
-#' list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
+#' list('`venn`' = m) |> rmd.tzh::render_(file = 'VennDiagram')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -82,8 +82,10 @@ venn.data.frame <- function(object, ...) {
 }
 
 #' @rdname venn
+#' @importFrom methods new
 #' @importFrom scales pal_hue
 #' @importFrom utils combn bibentry
+#' @importClassesFrom rmd.tzh md_lines
 #' @export venn.matrix
 #' @export
 venn.matrix <- function(
@@ -180,38 +182,7 @@ venn.matrix <- function(
       replacement = ''
     )
   
-  return(ret)
-}
-
-
-
-
-
-# @title [print.venn()]
-# @note
-# Removed as \CRANpkg{VennDiagram} v1.8.0 adds the `S3` method `VennDiagram:::print.VennDiagram`.
-
-
-
-
-
-#' @title Markdown Lines for `VennDiagram`
-#' 
-#' @param x a `VennDiagram`
-#' 
-#' @param ... additional parameters of function \link[rmd.tzh]{md_.default}
-#' 
-#' @examples
-#' # see ?venn
-#' @keywords internal
-#' @importFrom rmd.tzh md_
-#' @importFrom methods new
-#' @importFrom utils bibentry
-#' @export md_.VennDiagram
-#' @export
-md_.VennDiagram <- function(x, ...) {
-  
-  attr(x, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
+  attr(ret, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
     new(Class = 'md_lines', bibentry = bibentry(
       bibtype = 'article', key = 'Venn1880',
       author = 'John Venn',
@@ -225,10 +196,13 @@ md_.VennDiagram <- function(x, ...) {
       doi = '10.1080/14786448008626877'
     ), package = 'VennDiagram')
   
-  NextMethod(generic = 'md_') # ?rmd.tzh::md_.default
-  # works here, but not in [md_.consort()]
-  # tzh does not know why..
+  return(ret)
   
 }
+
+
+
+
+
 
 

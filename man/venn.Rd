@@ -60,7 +60,7 @@ m = list(
   B = state.name[2:21], 
   C = state.name[3:22]) |> venn() 
 m
-list('`venn`' = m) |> rmd.tzh::render_(file = 'gList')
+list('`venn`' = m) |> rmd.tzh::render_(file = 'VennDiagram')
 }
 \seealso{
 Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,
