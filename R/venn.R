@@ -37,7 +37,7 @@
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22]) |> venn() 
 #' m
-#' list('`venn`' = m) |> rmd.tzh::render_(file = 'VennDiagram')
+#' list('`venn`' = m) |> fastmd::render_(file = 'VennDiagram')
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -85,7 +85,7 @@ venn.data.frame <- function(object, ...) {
 #' @importFrom methods new
 #' @importFrom scales pal_hue
 #' @importFrom utils combn bibentry
-#' @importClassesFrom rmd.tzh md_lines
+#' @importClassesFrom fastmd md_lines
 #' @export venn.matrix
 #' @export
 venn.matrix <- function(

@@ -9,14 +9,14 @@
 #' @param ... additional parameters, currently of no use
 #' 
 #' @keywords internal
-#' @importFrom rmd.tzh md_
+#' @importFrom fastmd md_
 #' @importFrom methods new
 #' @export md_.grob
 #' @export
 md_.grob <- function(x, xnm, ...) {
   
   # a simplified version from 
-  # ?rmd.tzh::md_.default
+  # ?fastmd::md_.default
   
   z1 <- (attr(x, which = 'text', exact = TRUE) %||% character()) |>
     new(Class = 'md_lines')

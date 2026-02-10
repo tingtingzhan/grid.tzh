@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{a \link[consort]{consort_plot}}
 
-\item{...}{additional parameters of function \link[rmd.tzh]{md_.default}}
+\item{...}{additional parameters of function \link[fastmd]{md_.default}}
 }
 \description{
 Markdown Lines for \link[consort]{consort_plot}
@@ -28,6 +28,6 @@ cs1 = consort_plot(data = dispos.data, orders = c(
 cs2 = cs1 |> 
   build_grid()
 list(consort1 = cs1, consort2 = cs2) |> 
-  rmd.tzh::render_(file = 'consort')
+  fastmd::render_(file = 'consort')
 }
 \keyword{internal}

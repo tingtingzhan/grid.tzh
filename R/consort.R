@@ -52,7 +52,7 @@ consort_rx <- function(
 #' 
 #' @param x a \link[consort]{consort_plot}
 #' 
-#' @param ... additional parameters of function \link[rmd.tzh]{md_.default}
+#' @param ... additional parameters of function \link[fastmd]{md_.default}
 #' 
 #' @examples
 #' # example from \pkg{consort} vignette
@@ -68,9 +68,9 @@ consort_rx <- function(
 #' cs2 = cs1 |> 
 #'   build_grid()
 #' list(consort1 = cs1, consort2 = cs2) |> 
-#'   rmd.tzh::render_(file = 'consort')
+#'   fastmd::render_(file = 'consort')
 #' @keywords internal
-#' @importFrom rmd.tzh md_ md_.default
+#' @importFrom fastmd md_ md_.default
 #' @importFrom methods new
 #' @importFrom utils bibentry
 #' @export md_.consort
@@ -91,8 +91,8 @@ md_.consort <- function(x, ...) {
   # NextMethod(generic = 'md_') 
   # does NOT work! 
   # \link[consort]{consort_plot} returns an object of class "consort" "list"
-  # dispatch to \link[rmd.tzh]{md_.list} 
-  # instead of \link[rmd.tzh]{md_.default} 
+  # dispatch to \link[fastmd]{md_.list} 
+  # instead of \link[fastmd]{md_.default} 
   
   md_.default(x, ...) # ?consort:::print.consort
   
