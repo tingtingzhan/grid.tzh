@@ -72,21 +72,12 @@ consort_rx <- function(
 #' @keywords internal
 #' @importFrom fastmd md_ md_.default
 #' @importFrom methods new
-#' @importFrom utils bibentry
 #' @export md_.consort
 #' @export
 md_.consort <- function(x, ...) {
   
   attr(x, which = 'text') <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
-    new(Class = 'md_lines', package = 'consort', bibentry = bibentry(
-      bibtype = 'article', key = 'Schulz10',
-      author = 'Kenneth F. Schulz and Douglas G. Altman and David Moher',
-      title = 'CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials',
-      volume = '340',
-      year = '2010',
-      doi = '10.1136/bmj.c332',
-      journal = 'BMJ'
-    ))
+    new(Class = 'md_lines', package = 'consort', bibentry = .schulz10())
   
   # NextMethod(generic = 'md_') 
   # does NOT work! 

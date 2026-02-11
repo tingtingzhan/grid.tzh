@@ -84,7 +84,7 @@ venn.data.frame <- function(object, ...) {
 #' @rdname venn
 #' @importFrom methods new
 #' @importFrom scales pal_hue
-#' @importFrom utils combn bibentry
+#' @importFrom utils combn
 #' @importClassesFrom fastmd md_lines
 #' @export venn.matrix
 #' @export
@@ -183,18 +183,7 @@ venn.matrix <- function(
     )
   
   attr(ret, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
-    new(Class = 'md_lines', bibentry = bibentry(
-      bibtype = 'article', key = 'Venn1880',
-      author = 'John Venn',
-      title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
-      journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
-      volume = '10',
-      number = '59',
-      pages = '1--18',
-      year = '1880',
-      publisher = 'Taylor & Francis',
-      doi = '10.1080/14786448008626877'
-    ), package = 'VennDiagram')
+    new(Class = 'md_lines', bibentry = .venn(), package = 'VennDiagram')
   
   return(ret)
   
