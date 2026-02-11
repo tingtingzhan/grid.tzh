@@ -6,9 +6,12 @@
 \alias{.venn}
 \title{bibs in grid.tzh package}
 \usage{
-.schulz10()
+.schulz10(key = "Schulz10", ...)
 
-.venn()
+.venn(key = "Venn1880", ...)
+}
+\arguments{
+\item{key, ...}{\link[utils]{bibentry}}
 }
 \description{
 bibs in grid.tzh package

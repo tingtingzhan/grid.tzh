@@ -2,14 +2,20 @@
 
 #' @title bibs in grid.tzh package
 #' 
+#' @param key,... \link[utils]{bibentry}
+#' 
 #' @keywords internal
-#' @importFrom utils bibentry
+#' @importFrom utils bibentry person
 #' @name grid_bib
 #' @export
-.schulz10 <- \() {
+.schulz10 <- \(key = 'Schulz10', ...) {
   bibentry(
-    bibtype = 'article', key = 'Schulz10',
-    author = 'Kenneth F. Schulz and Douglas G. Altman and David Moher',
+    bibtype = 'article', key = key, ...,
+    author = c(
+      person(given = c('Kenneth', 'F.'), family = 'Schulz'), 
+      person(given = c('Douglas', 'G.'), family = 'Altman'), 
+      person(given = 'David', family = 'Moher')
+    ),
     title = 'CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials',
     volume = '340',
     year = '2010',
@@ -21,10 +27,10 @@
 
 #' @rdname grid_bib
 #' @export
-.venn <- \() {
+.venn <- \(key = 'Venn1880', ...) {
   bibentry(
-    bibtype = 'article', key = 'Venn1880',
-    author = 'John Venn',
+    bibtype = 'article', key = key, ...,
+    author = person(given = 'John', family = 'Venn'),
     title = 'I. On the diagrammatic and mechanical representation of propositions and reasonings',
     journal = 'The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science',
     volume = '10',
