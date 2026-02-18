@@ -10,7 +10,6 @@
 #' 
 #' @keywords internal
 #' @importFrom fastmd md_
-#' @importFrom methods new
 #' @export md_.grob
 #' @export
 md_.grob <- function(x, xnm, ...) {
@@ -23,7 +22,6 @@ md_.grob <- function(x, xnm, ...) {
   
   z2 <- c(
     '```{r}',
-    '#| echo: false', 
     
     # len-0 compatible
     x |>

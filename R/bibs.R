@@ -5,7 +5,6 @@
 #' @param key,... \link[utils]{bibentry}
 #' 
 #' @keywords internal
-#' @importFrom utils bibentry person
 #' @name grid_bib
 #' @export
 .schulz10 <- \(key = 'Schulz10', ...) {

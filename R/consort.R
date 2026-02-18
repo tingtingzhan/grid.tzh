@@ -68,10 +68,9 @@ consort_rx <- function(
 #' cs2 = cs1 |> 
 #'   build_grid()
 #' list(consort1 = cs1, consort2 = cs2) |> 
-#'   fastmd::render_(file = 'consort')
+#'   fastmd::render2html(file = 'consort')
 #' @keywords internal
 #' @importFrom fastmd md_ md_.default
-#' @importFrom methods new
 #' @export md_.consort
 #' @export
 md_.consort <- function(x, ...) {
