@@ -37,7 +37,7 @@
 #'   B = state.name[2:21], 
 #'   C = state.name[3:22]) |> venn() 
 #' m
-#' list('`venn`' = m) |> fastmd::render2html(file = 'VennDiagram')
+#' list('`venn`' = m) |> fastmd::render2html()
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -180,15 +180,41 @@ venn.matrix <- function(
       replacement = ''
     )
   
-  attr(ret, which = 'text') <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
-    new(Class = 'md_lines', bibentry = .venn(), package = 'VennDiagram')
-  
   return(ret)
   
 }
 
 
 
+#' @title Fast Mark Down Lines for `VennDiagram`
+#' 
+#' @param x a `VennDiagram`
+#' 
+#' @param xnm ..
+#' 
+#' @param ... ..
+#' 
+#' @keywords internal
+#' @importFrom fastmd md_
+#' @importClassesFrom fastmd md_lines
+#' @export md_.VennDiagram
+#' @export
+md_.VennDiagram <- function(x, xnm, ...) {
+  
+  z1 <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
+    new(Class = 'md_lines', bibentry = .venn(), package = 'VennDiagram')
+  
+  # NextMethod(generic = 'md_') 
+  # does NOT work! 
+  # \link[consort]{consort_plot} returns an object of class "consort" "list"
+  # dispatch to \link[fastmd]{md_.list} 
+  # instead of \link[fastmd]{md_.default} 
+  
+  z2 <- md_.default(x = x, xnm = xnm, ...)
+  
+  c(z1, z2)
+  
+}
 
 
 

@@ -4,7 +4,14 @@
 \alias{md_.grob}
 \title{Markdown Lines for \link[grid]{grob}}
 \usage{
-\method{md_}{grob}(x, xnm, ...)
+\method{md_}{grob}(
+  x,
+  xnm,
+  ...,
+  fig.height = attr(x, which = "fig-height", exact = TRUE),
+  fig.width = attr(x, which = "fig-width", exact = TRUE),
+  fig.cap = attr(x, which = "fig-cap", exact = TRUE)
+)
 }
 \arguments{
 \item{x}{a \link[grid]{grob}}
@@ -12,6 +19,10 @@
 \item{xnm}{..}
 
 \item{...}{additional parameters, currently of no use}
+
+\item{fig.height, fig.width}{..}
+
+\item{fig.cap}{..}
 }
 \description{
 Markdown Lines for \link[grid]{grob}

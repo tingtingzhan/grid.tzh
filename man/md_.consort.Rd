@@ -28,6 +28,6 @@ cs1 = consort_plot(data = dispos.data, orders = c(
 cs2 = cs1 |> 
   build_grid()
 list(consort1 = cs1, consort2 = cs2) |> 
-  fastmd::render2html(file = 'consort')
+  fastmd::render2html()
 }
 \keyword{internal}

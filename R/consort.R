@@ -68,14 +68,14 @@ consort_rx <- function(
 #' cs2 = cs1 |> 
 #'   build_grid()
 #' list(consort1 = cs1, consort2 = cs2) |> 
-#'   fastmd::render2html(file = 'consort')
+#'   fastmd::render2html()
 #' @keywords internal
 #' @importFrom fastmd md_ md_.default
 #' @export md_.consort
 #' @export
 md_.consort <- function(x, ...) {
   
-  attr(x, which = 'text') <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
+  z1 <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
     new(Class = 'md_lines', package = 'consort', bibentry = .schulz10())
   
   # NextMethod(generic = 'md_') 
@@ -84,7 +84,9 @@ md_.consort <- function(x, ...) {
   # dispatch to \link[fastmd]{md_.list} 
   # instead of \link[fastmd]{md_.default} 
   
-  md_.default(x, ...) # ?consort:::print.consort
+  z2 <- md_.default(x, ...) # ?consort:::print.consort
+  
+  c(z1, z2)
   
 }
 
