@@ -55,12 +55,19 @@ or
 \link[VennDiagram]{draw.quintuple.venn}.
 }
 \examples{
-m = list(
-  A = state.name[1:20], 
-  B = state.name[2:21], 
-  C = state.name[3:22]) |> venn() 
-m
-list('`venn`' = m) |> fastmd::render2html()
+A = datasets::state.name[1:10]
+B = datasets::state.name[3:12]
+
+m2 = list(A = A, B = B) |> 
+ venn()
+m2
+
+m3 = list(A = A, B = B, C = state.name[5:14]) |> 
+ venn() 
+m3
+
+list(two = m2, three = m3) |> fastmd::render2html()
+
 }
 \seealso{
 Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,

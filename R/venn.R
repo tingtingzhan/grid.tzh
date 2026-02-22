@@ -32,12 +32,19 @@
 #' but not as elegantly as function [venn.matrix()].
 #'
 #' @examples 
-#' m = list(
-#'   A = state.name[1:20], 
-#'   B = state.name[2:21], 
-#'   C = state.name[3:22]) |> venn() 
-#' m
-#' list('`venn`' = m) |> fastmd::render2html()
+#' A = datasets::state.name[1:10]
+#' B = datasets::state.name[3:12]
+#' 
+#' m2 = list(A = A, B = B) |> 
+#'  venn()
+#' m2
+#' 
+#' m3 = list(A = A, B = B, C = state.name[5:14]) |> 
+#'  venn() 
+#' m3
+#' 
+#' list(two = m2, three = m3) |> fastmd::render2html()
+#' 
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
 #' @importFrom stats setNames
@@ -52,22 +59,35 @@ venn <- function(object, ...) {
 #' @export venn.list
 #' @export
 venn.list <- function(object, ...) {
+  
   object <- object[lengths(object) > 0L]
+  
   typ <- vapply(object, FUN = typeof, FUN.VALUE = '')
   if (!all(duplicated.default(typ)[-1L])) stop('all elements of `object` must be the same typeof')
+  
+  if (length(object) == 2L) {
+    object |> 
+      do.call(what = set_xor, args = _) |>
+      print()
+  }
+  
   obj <- switch(typ[1L], logical = {
     ns <- lengths(object, use.names = FALSE)
     if (!all(duplicated.default(ns)[-1L])) stop('all \'logical\' elements of `object` must be of same length')
-    do.call(cbind, args = object)
+    do.call(what = cbind, args = object)
   }, character =, integer =, double = { 
     # 'character'
     # 'integer', typeof \link[base]{factor}
     # 'double', some `ptid` are stored as \link[base]{numeric} 
     if (anyNA(object, recursive = TRUE)) stop('each element of `object` must not contain NA')
     if (!length(nm <- names(object)) || !all(nzchar(nm))) stop('`object` must be fully named')
-    do.call(cbind, args = lapply(object, FUN = `%in%`, x = unique.default(unlist(object, use.names = FALSE))))
+    object |>
+      lapply(FUN = `%in%`, x = unique.default(unlist(object, use.names = FALSE))) |>
+      do.call(what = cbind, args = _)
   }, stop(sQuote(typ[1L]), ' not supported'))
+  
   venn.matrix(obj, ...)
+  
 }
 
 #' @rdname venn
@@ -186,6 +206,82 @@ venn.matrix <- function(
 
 
 
+
+
+
+#' @title Exclusive-OR Elements
+#' 
+#' @description Exclusive-OR elements in two vectors.
+#' 
+#' @param ... two named R objects of the same \link[base]{typeof}
+#' 
+#' @details 
+#' The function [set_xor()] returns the exclusive-OR elements in each of the sets, which is slow
+#' and only intended for end-user.
+#' 
+#' @returns 
+#' The function [set_xor()] returns a \link[stats]{listof} of \link[base]{vector}s.
+#' 
+#' @seealso 
+#' \link[base]{setequal}
+#' 
+#' @examples 
+#' set_xor(a = 1:5, b = 3:7)
+#' set_xor(a = 1:5, b = 1:3)
+#' @keywords internal
+#' @export
+set_xor <- function(...) {
+  
+  dots <- match.call()[-1L] |> 
+    as.list.default()
+  
+  if (length(dots) != 2L) stop('takes two and only two input objects')
+  
+  nm <- names(dots)
+  if (!length(nm) || any(!nzchar(nm)) || anyNA(nm)) stop('input must be named')
+  nm <- nm |>
+    col_br_magenta() |> style_bold() |>
+    sprintf(fmt = 'In %s only', . = _)
+  
+  ag <- list(...)
+  e1 <- ag[[1L]]
+  e2 <- ag[[2L]]
+  
+  if (anyDuplicated(e1)) warning('Duplicate(s) detected in `e1`')
+  if (anyDuplicated(e2)) warning('Duplicate(s) detected in `e2`')
+  e1 <- e1 |>
+    unique.default() # could be 'factor'
+  e2 <- e2 |>
+    unique.default()
+  
+  # ?base::setequal
+  id1 <- e1 |>
+    match(x = _, table = e2, nomatch = NA_integer_) |>
+    is.na()
+  id2 <- e2 |>
+    match(x = _, table = e1, nomatch = NA_integer_) |>
+    is.na()
+  
+  z <- list(e1[id1], e2[id2]) |>
+    lapply(FUN = sort.int)
+  names(z) <- nm
+  
+  z <- z[lengths(z) > 0L]
+  if (!length(z)) {
+    message('Two sets have same elements.')
+    return(invisible())
+  }
+  class(z) <- 'listof'
+  return(z)
+  
+}
+
+
+
+
+
+
+
 #' @title Fast Mark Down Lines for `VennDiagram`
 #' 
 #' @param x a `VennDiagram`
@@ -201,14 +297,8 @@ venn.matrix <- function(
 #' @export
 md_.VennDiagram <- function(x, xnm, ...) {
   
-  z1 <- '@Venn1880 diagram is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
+  z1 <- '[@Venn1880 diagram](https://en.wikipedia.org/wiki/Venn_diagram) is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
     new(Class = 'md_lines', bibentry = .venn(), package = 'VennDiagram')
-  
-  # NextMethod(generic = 'md_') 
-  # does NOT work! 
-  # \link[consort]{consort_plot} returns an object of class "consort" "list"
-  # dispatch to \link[fastmd]{md_.list} 
-  # instead of \link[fastmd]{md_.default} 
   
   z2 <- md_.default(x = x, xnm = xnm, ...)
   

@@ -13,4 +13,4 @@ RoxygenNote: 7.3.3
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5)
-Imports: methods, consort (== 1.2.2), VennDiagram (== 1.8.2), scales (== 1.4.0), fastmd
+Imports: methods, cli (== 3.6.5), consort (== 1.2.2), VennDiagram (== 1.8.2), scales (== 1.4.0), fastmd
