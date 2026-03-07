@@ -14,13 +14,13 @@ sidebox(pattern = "^sidebox_", data, ...)
 \item{...}{additional parameters, currently not in use}
 }
 \value{
-Function \code{\link[=sidebox]{sidebox()}} returns a \link[base]{matrix}
+The function \code{\link[=sidebox]{sidebox()}} returns a \link[base]{matrix}
 }
 \description{
 sidebox
 }
 \details{
-Function \code{\link[=sidebox]{sidebox()}} converts ineligibility criterion in \emph{side box} into
+The function \code{\link[=sidebox]{sidebox()}} converts ineligibility criterion in \emph{side box} into
 a \link[base]{logical} \link[base]{matrix} of \strong{eligibility} criterion.
 }
 \keyword{internal}

@@ -1,5 +1,32 @@
 
 
+#' @title \link[consort]{consort_plot}
+#' 
+#' @examples
+#' # example from \pkg{consort} vignette
+#' library(consort)
+#' data(dispos.data)
+#' cs = consort_plot(data = dispos.data, orders = c(
+#'   trialno = 'Population',
+#'   exclusion = 'Excluded',
+#'   trialno = 'Allocated',
+#'   subjid_notdosed = 'Not dosed',
+#'   followup = 'Followup'
+#' ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
+#' list(
+#'  '`consort`' = cs, 
+#'  '`grob`' = build_grid(cs)
+#' ) |> fastmd::render2html()
+#'   
+#' @name consort
+NULL
+
+
+
+
+
+
+
 #' @title Finetune Function \link[consort]{consort_plot}
 #' 
 #' @description
@@ -15,13 +42,13 @@
 #' 
 #' 
 #' @details
-#' Function [consort_rx()]
+#' The function [consort_rx()]
 #' \itemize{
 #' \item{finds the argument `side_box` of function \link[consort]{consort_plot}, from the argument of `orders`.}
 #' }
 #' 
 #' @returns
-#' Function [consort_rx()] returns a 
+#' The function [consort_rx()] returns a 
 #' \link[consort]{consort_plot} object.
 #' 
 #' @keywords internal
@@ -48,30 +75,8 @@ consort_rx <- function(
 
 
 
-#' @title Markdown Lines for \link[consort]{consort_plot}
-#' 
-#' @param x a \link[consort]{consort_plot}
-#' 
-#' @param ... additional parameters of function \link[fastmd]{md_.default}
-#' 
-#' @examples
-#' # example from \pkg{consort} vignette
-#' library(consort)
-#' data(dispos.data)
-#' cs1 = consort_plot(data = dispos.data, orders = c(
-#'   trialno = 'Population',
-#'   exclusion = 'Excluded',
-#'   trialno = 'Allocated',
-#'   subjid_notdosed = 'Not dosed',
-#'   followup = 'Followup'
-#' ), side_box = c('exclusion', 'subjid_notdosed'), cex = 0.9)
-#' cs2 = cs1 |> 
-#'   build_grid()
-#' list(consort1 = cs1, consort2 = cs2) |> 
-#'   fastmd::render2html()
-#' @keywords internal
+
 #' @importFrom fastmd md_ md_.default
-#' @export md_.consort
 #' @export
 md_.consort <- function(x, ...) {
   
@@ -107,11 +112,11 @@ md_.consort <- function(x, ...) {
 #' @param ... additional parameters, currently not in use
 #' 
 #' @details
-#' Function [sidebox()] converts ineligibility criterion in *side box* into 
+#' The function [sidebox()] converts ineligibility criterion in *side box* into 
 #' a \link[base]{logical} \link[base]{matrix} of **eligibility** criterion.
 #' 
 #' @returns 
-#' Function [sidebox()] returns a \link[base]{matrix}
+#' The function [sidebox()] returns a \link[base]{matrix}
 #' 
 #' @keywords internal
 #' @export
@@ -139,10 +144,10 @@ sidebox <- function(pattern = '^sidebox_', data, ...) {
 #' @param sep \link[base]{character} scalar
 #' 
 #' @returns
-#' Function [paste_nna_()] returns a \link[base]{character} \link[base]{vector}.
+#' The function [paste_nna_()] returns a \link[base]{character} \link[base]{vector}.
 #' 
 #' @details
-#' Function [paste_nna_()] can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
+#' The function [paste_nna_()] can be used to combine two or more reasons in a \CRANpkg{consort} diagram.
 #' 
 #' @examples
 #' x = c(NA_character_, 'x1', 'x2')

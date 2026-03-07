@@ -16,14 +16,14 @@ consort_rx(data, orders, sidebox_pattern = "^sidebox_", ...)
 \item{...}{additional parameters of \link[consort]{consort_plot}}
 }
 \value{
-Function \code{\link[=consort_rx]{consort_rx()}} returns a
+The function \code{\link[=consort_rx]{consort_rx()}} returns a
 \link[consort]{consort_plot} object.
 }
 \description{
 Some minor touch-ups of function \link[consort]{consort_plot}.
 }
 \details{
-Function \code{\link[=consort_rx]{consort_rx()}}
+The function \code{\link[=consort_rx]{consort_rx()}}
 \itemize{
 \item{finds the argument \code{side_box} of function \link[consort]{consort_plot}, from the argument of \code{orders}.}
 }

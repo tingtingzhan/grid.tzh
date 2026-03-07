@@ -25,10 +25,10 @@
 #' \link[VennDiagram]{draw.quintuple.venn}.
 #' 
 #' @returns 
-#' Function [venn()] returns a \link[grid]{gList} object. 
+#' The function [venn()] returns a \link[grid]{gList} object. 
 #' 
 #' @seealso 
-#' Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, 
+#' The function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input, 
 #' but not as elegantly as function [venn.matrix()].
 #'
 #' @examples 
@@ -282,18 +282,8 @@ set_xor <- function(...) {
 
 
 
-#' @title Fast Mark Down Lines for `VennDiagram`
-#' 
-#' @param x a `VennDiagram`
-#' 
-#' @param xnm ..
-#' 
-#' @param ... ..
-#' 
-#' @keywords internal
 #' @importFrom fastmd md_
 #' @importClassesFrom fastmd md_lines
-#' @export md_.VennDiagram
 #' @export
 md_.VennDiagram <- function(x, xnm, ...) {
   

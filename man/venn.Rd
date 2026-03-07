@@ -40,7 +40,7 @@ venn(object, ...)
 \item{ind, lty, fill, alpha, cex, cat.col, cat.cex, cat.fontface, print.mode, cat.default.pos, ...}{see function \link[VennDiagram]{draw.pairwise.venn}}
 }
 \value{
-Function \code{\link[=venn]{venn()}} returns a \link[grid]{gList} object.
+The function \code{\link[=venn]{venn()}} returns a \link[grid]{gList} object.
 }
 \description{
 Minor modifications to function \link[VennDiagram]{venn.diagram}.
@@ -70,7 +70,7 @@ list(two = m2, three = m3) |> fastmd::render2html()
 
 }
 \seealso{
-Function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,
+The function \link[VennDiagram]{venn.diagram} does handle \link[base]{list} input,
 but not as elegantly as function \code{\link[=venn.matrix]{venn.matrix()}}.
 }
 \keyword{internal}
