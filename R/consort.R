@@ -75,21 +75,17 @@ consort_rx <- function(
 
 
 
-
-#' @importFrom fastmd md_ md_.default
+# \link[consort]{consort_plot} returns an object of class "consort" "list"
+# do *not* want to dispatch to \link[fastmd]{md_.list} 
+#' @importFrom fastmd md_ md_int
+#' @importClassesFrom fastmd md_lines
 #' @export
 md_.consort <- function(x, ...) {
   
   z1 <- 'CONSORT [Consolidated Standards of Reporting Trials, @Schulz10] diagram is created by <u>**`R`**</u> package <u>**`consort`**</u>.' |>
     new(Class = 'md_lines', package = 'consort', bibentry = .schulz10())
   
-  # NextMethod(generic = 'md_') 
-  # does NOT work! 
-  # \link[consort]{consort_plot} returns an object of class "consort" "list"
-  # dispatch to \link[fastmd]{md_.list} 
-  # instead of \link[fastmd]{md_.default} 
-  
-  z2 <- md_.default(x, ...) # ?consort:::print.consort
+  z2 <- md_int(x, engine = 'print', ...) # ?consort:::print.consort
   
   c(z1, z2)
   

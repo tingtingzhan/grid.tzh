@@ -286,7 +286,7 @@ set_xor <- function(...) {
 
 
 
-#' @importFrom fastmd md_
+#' @importFrom fastmd md_ md_int
 #' @importClassesFrom fastmd md_lines
 #' @export
 md_.VennDiagram <- function(x, xnm, ...) {
@@ -294,8 +294,7 @@ md_.VennDiagram <- function(x, xnm, ...) {
   z1 <- '[@Venn1880 diagram](https://en.wikipedia.org/wiki/Venn_diagram) is created using <u>**`R`**</u> package <u>**`VennDiagram`**</u>.' |>
     new(Class = 'md_lines', bibentry = .venn(), package = 'VennDiagram')
   
-  z2 <- md_.default(x = x, xnm = xnm, ...)
-  
+  z2 <- md_int(x = x, xnm = xnm, engine = 'print', ...) # VennDiagram:::print.VennDiagram
   c(z1, z2)
   
 }
