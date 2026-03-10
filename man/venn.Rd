@@ -66,7 +66,11 @@ m3 = list(A = A, B = B, C = state.name[5:14]) |>
  venn() 
 m3
 
-list(two = m2, three = m3) |> fastmd::render2html()
+list(
+ two = m2 |>
+  structure(fig.height = 2.5, fig.width = 4.5), 
+ three = m3
+) |> fastmd::render2html()
 
 }
 \seealso{

@@ -43,7 +43,11 @@
 #'  venn() 
 #' m3
 #' 
-#' list(two = m2, three = m3) |> fastmd::render2html()
+#' list(
+#'  two = m2 |>
+#'   structure(fig.height = 2.5, fig.width = 4.5), 
+#'  three = m3
+#' ) |> fastmd::render2html()
 #' 
 #' @keywords internal
 #' @importFrom VennDiagram draw.single.venn draw.pairwise.venn draw.triple.venn draw.quad.venn draw.quintuple.venn
